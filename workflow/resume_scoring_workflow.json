@@ -1,0 +1,2630 @@
+{
+  "name": "Resume Processing Sub-Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "318e45d2-c765-4f32-9d16-a902beacc536",
+      "name": "Get Config Row",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1200,
+        1456
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "JD_Version": "={{ ($json.config.JD_Version || 1) }}",
+            "JD_Hash": "={{ $json.currentJDHash }}",
+            "JD_Last_Updated": "={{ $json.jdModifiedTime }}",
+            "JD_Quality_Score": "={{ $json.jdQualityScore }}",
+            "JD_Quality_Band": "={{ $json.jdQualityBand }}",
+            "JD_Fields_Missing": "={{ $json.absentFields }}",
+            "Role_Name": "={{ $json.extractedRoleName }}",
+            "Seniority_Level": "={{ $json.extractedSeniority }}",
+            "Experience_Required": "={{ $json.extractedExperience }}",
+            "Primary_Industry": "={{ $json.extractedIndustry }}",
+            "Adjacent_Industries": "={{ $json.extractedAdjacentIndustries }}",
+            "Role_Responsibilities": "={{ $json.extractedResponsibilities }}",
+            "Must_Have_Skills": "={{ $json.extractedMustHaveSkills }}",
+            "Nice_To_Have_Skills": "={{ $json.extractedNiceToHaveSkills }}",
+            "Config_Last_Updated": "={{ new Date().toISOString() }}",
+            "row_number": 2,
+            "JD_File_Name": "={{ $json.jdFileName }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "JD_File_Name",
+              "displayName": "JD_File_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Version",
+              "displayName": "JD_Version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Hash",
+              "displayName": "JD_Hash",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Last_Updated",
+              "displayName": "JD_Last_Updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Quality_Score",
+              "displayName": "JD_Quality_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Quality_Band",
+              "displayName": "JD_Quality_Band",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "JD_Fields_Missing",
+              "displayName": "JD_Fields_Missing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ready_To_Score",
+              "displayName": "Ready_To_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Role_Name",
+              "displayName": "Role_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Seniority_Level",
+              "displayName": "Seniority_Level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Experience_Required",
+              "displayName": "Experience_Required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Primary_Industry",
+              "displayName": "Primary_Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Adjacent_Industries",
+              "displayName": "Adjacent_Industries",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Role_Responsibilities",
+              "displayName": "Role_Responsibilities",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Must_Have_Skills",
+              "displayName": "Must_Have_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nice_To_Have_Skills",
+              "displayName": "Nice_To_Have_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Dealbreaker_Skills",
+              "displayName": "Dealbreaker_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Skills_Match",
+              "displayName": "Weight_Skills_Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Experience",
+              "displayName": "Weight_Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Seniority",
+              "displayName": "Weight_Seniority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Impact_Quality",
+              "displayName": "Weight_Impact_Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Red_Flag_Penalty",
+              "displayName": "Weight_Red_Flag_Penalty",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Config_Version",
+              "displayName": "Config_Version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Config_Last_Updated",
+              "displayName": "Config_Last_Updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rescore_Previous",
+              "displayName": "Rescore_Previous",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "8845b880-448d-4303-bc19-ef0cb278d5de",
+      "name": "Update Config Row 2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1696,
+        1456
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1KYeBKo2iTgEznm1EiQSCwMs30SAOHLoB",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "36c080d4-42f0-484f-a5fc-fac36e30f015",
+      "name": "Drive Trigger - New Resume1",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2544,
+        1456
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0XUd3MdfOwNeRcDq",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const file = $input.item.json;\nconst fileName = file.name || '';\nconst mimeType = file.mimeType || '';\n\nconst isPDF = fileName.toLowerCase().endsWith('.pdf') || mimeType === 'application/pdf';\n\nreturn [{\n  json: {\n    ...file,\n    fileId: file.id,\n    fileName: file.name,\n    isPDF: isPDF,\n    submissionDate: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "386240a0-37cf-487d-9a41-7e53532b1593",
+      "name": "Check File Is PDF1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2320,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-is-pdf",
+              "leftValue": "={{ $json.isPDF }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8086e31c-1fd4-4f95-8836-b8d8d1dd0262",
+      "name": "Is PDF?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2096,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1i-zT2uViIPJu8Oci5KaD4oKDKuUGg8eZa6uEdnPaZm4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1i-zT2uViIPJu8Oci5KaD4oKDKuUGg8eZa6uEdnPaZm4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "223c6320-4a58-4808-987d-81ce4dc91a7d",
+      "name": "Get Output Sheet1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1872,
+        1456
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const currentFile = $('Check File Is PDF1').item.json;\nconst fileId = currentFile.fileId;\n\n// Get all rows from output sheet\nconst allRows = $input.all();\n\n// If sheet is empty (first run), no duplicates possible\nif (!allRows || allRows.length === 0) {\n  return [{\n    json: {\n      ...currentFile,\n      isDuplicateFile: false,\n      isFirstRun: true\n    }\n  }];\n}\n\n// Check if file ID already exists\nconst isDuplicate = allRows.some(row => {\n  const rowFileId = row.json['Resume File ID'] || '';\n  return rowFileId === fileId;\n});\n\nreturn [{\n  json: {\n    ...currentFile,\n    isDuplicateFile: isDuplicate,\n    isFirstRun: false\n  }\n}];"
+      },
+      "id": "5139b04b-6c43-431c-ac5b-9bc457142037",
+      "name": "Check File Duplicate1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1648,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-not-duplicate",
+              "leftValue": "={{ $json.isDuplicateFile }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d6c046ce-22f4-40b2-ae9c-559d7cbe23e7",
+      "name": "Not Duplicate?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1424,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const configRow = $input.first();\nconst fileData = $('Check File Duplicate1').item.json;\n\nif (!configRow) {\n  throw new Error('Config sheet is empty - please run sheet setup workflow first');\n}\n\nconst config = configRow.json;\n\nconst readyToScore = (config.Ready_To_Score || '').toString().trim().toUpperCase();\n\n// Parse and validate weights\nconst w1 = parseFloat(config.Weight_Skills_Match) || 0;\nconst w2 = parseFloat(config.Weight_Experience) || 0;\nconst w3 = parseFloat(config.Weight_Seniority) || 0;\nconst w4 = parseFloat(config.Weight_Impact_Quality) || 0;\nconst w5 = parseFloat(config.Weight_Red_Flag_Penalty) || 0;\nconst weightSum = w1 + w2 + w3 + w4 + w5;\nconst weightSumValid = Math.abs(weightSum - 100) < 0.01;\n\nreturn [{\n  json: {\n    ...fileData,\n    config: config,\n    readyToScore: readyToScore,\n    weightSum: weightSum,\n    weights: { w1, w2, w3, w4, w5 },\n    weightSumValid: weightSumValid,\n    weightSumError: !weightSumValid\n      ? `Weights sum to ${weightSum}, must equal 100`\n      : ''\n  }\n}];"
+      },
+      "id": "c2c7e2d6-82e4-4fa5-9c58-dcc9c300a2bb",
+      "name": "Parse Config1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -976,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition-ready",
+              "leftValue": "={{ $json.readyToScore }}",
+              "rightValue": "YES",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cc3087c1-fba4-4c6d-b65f-55c8ebd65a21",
+      "name": "Config Ready?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": ".pdf",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1rNnprYoy6huUIDoDkpdDwk5NeVDQRRKs",
+            "mode": "list",
+            "cachedResultName": "JD",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1rNnprYoy6huUIDoDkpdDwk5NeVDQRRKs"
+          }
+        },
+        "options": {}
+      },
+      "id": "64ac9bed-6e9c-4935-9365-0d69c9b3df24",
+      "name": "Find JD File1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -320,
+        1456
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0XUd3MdfOwNeRcDq",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const allFiles = $input.all();\n\n// Find first PDF in JD folder\nconst jdFile = allFiles.find(f => {\n  const name = (f.json.name || '').toLowerCase();\n  const mime = f.json.mimeType || '';\n  return name.endsWith('.pdf') || mime === 'application/pdf';\n});\n\nif (!jdFile) {\n  return [{\n    json: {\n      jdFound: false,\n      jdError: 'No JD PDF found in JD folder'\n    }\n  }];\n}\n\nconst jdFileId = jdFile.json.id;\nconst jdFileName = jdFile.json.name;\nconst jdModifiedTime = jdFile.json.modifiedTime || '';\nconst currentJDHash = `${jdFileId}_${jdModifiedTime}`;\n\nreturn [{\n  json: {\n    jdFound: true,\n    jdFileId,\n    jdFileName,\n    jdModifiedTime,\n    currentJDHash\n  }\n}];"
+      },
+      "id": "a9fb672f-cc52-44b7-b794-838d21a9b5d1",
+      "name": "Check JD File1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-jd-found",
+              "leftValue": "={{ $json.jdFound }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "32609e8a-1065-4cfa-8b6b-ed84a3d33dd9",
+      "name": "JD Found?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        128,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.jdFileId }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "bc57ccff-6aba-41f1-8bc6-daf5dbe0005b",
+      "name": "Download JD Text1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        352,
+        1456
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0XUd3MdfOwNeRcDq",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "YOUR-API-KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1500,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"You are a JD quality evaluator and structured data extractor. Evaluate this Job Description and return ONLY valid JSON, no other text.\\n\\nQUALITY SCORING - Score each field 0-2:\\n2 = specific and clearly stated\\n1 = vague but directional, implied\\n0 = completely absent\\n\\nSCORING RULES:\\n- Soft skills alone (communication, leadership) never score above 1\\n- You MUST quote exact text as evidence for any score above 0\\n- If no text to quote, score must be 0\\n- Required skills must be specific named tools or methods to score 2\\n\\nEXTRACTION RULES:\\n- extracted_role_name: job title only, no company name\\n- extracted_seniority: one of — Intern, Associate, Mid, Senior, Lead, Director\\n- extracted_experience: copy the exact experience requirement text from JD\\n- extracted_industry: primary industry only\\n- extracted_adjacent_industries: other industries mentioned or implied\\n- extracted_responsibilities: summarise key responsibilities in one paragraph\\n\\nSKILLS EXTRACTION RULES — follow this strictly:\\n- extracted_must_have_skills: ONLY skills the JD explicitly marks as required, mandatory, must-have, or essential. Copy exact skill names from the JD — do not paraphrase, rename, or reword them\\n- extracted_nice_to_have_skills: ONLY skills the JD explicitly marks as preferred, bonus, advantageous, or nice-to-have. Copy exact names.\\n- If the JD does not use explicit labels like \\\"required\\\" or \\\"preferred\\\", treat ALL skills mentioned anywhere in the JD as extracted_must_have_skills\\n- extracted_must_have_skills should NEVER be an empty array if any skills are mentioned in the JD\\n- Never move a must-have skill into nice-to-have or vice versa\\n- Never invent skills not present in the JD text\\n\\nJD TEXT:\\n{{ $json.jdTextSanitized }}\\n\\nReturn this exact JSON structure with no extra text:\\n{\\\"fields\\\": {\\\"responsibilities\\\": {\\\"score\\\": 0, \\\"evidence\\\": \\\"\\\", \\\"reasoning\\\": \\\"\\\"}, \\\"skills\\\": {\\\"score\\\": 0, \\\"evidence\\\": \\\"\\\", \\\"reasoning\\\": \\\"\\\"}, \\\"experience\\\": {\\\"score\\\": 0, \\\"evidence\\\": \\\"\\\", \\\"reasoning\\\": \\\"\\\"}, \\\"seniority\\\": {\\\"score\\\": 0, \\\"evidence\\\": \\\"\\\", \\\"reasoning\\\": \\\"\\\"}, \\\"industry\\\": {\\\"score\\\": 0, \\\"evidence\\\": \\\"\\\", \\\"reasoning\\\": \\\"\\\"}}, \\\"total_score\\\": 0, \\\"quality_band\\\": \\\"\\\", \\\"absent_fields\\\": [], \\\"inferred_fields\\\": [], \\\"extracted_role_name\\\": \\\"\\\", \\\"extracted_seniority\\\": \\\"\\\", \\\"extracted_experience\\\": \\\"\\\", \\\"extracted_industry\\\": \\\"\\\", \\\"extracted_adjacent_industries\\\": [], \\\"extracted_responsibilities\\\": \\\"\\\", \\\"extracted_must_have_skills\\\": [], \\\"extracted_nice_to_have_skills\\\": []}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "85b60a43-2cdb-4968-b8aa-235e9511865a",
+      "name": "JD Quality Check (Haiku)1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1024,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// The HTTP request node merges input json with response\n// So $input.item.json has BOTH the Haiku response \n// AND the upstream data\n\nconst item = $input.item.json;\n\n// Response is in item.content\n// Upstream data is also on item directly\nlet jdAnalysis = null;\n\ntry {\n  const content = item.content;\n  let rawText = Array.isArray(content)\n    ? content.filter(c => c.type === 'text').map(c => c.text).join('')\n    : JSON.stringify(content);\n  \n  const cleaned = rawText\n    .replace(/```json/g, '')\n    .replace(/```/g, '')\n    .trim();\n    \n  jdAnalysis = JSON.parse(cleaned);\n} catch(e) {\n  jdAnalysis = null;\n}\n\nif (!jdAnalysis) {\n  return [{\n    json: {\n      jdQualityScore: 0,\n      jdQualityBand: 'Poor',\n      proceedWithScoring: false,\n      config: item.config || {},\n      weights: item.weights || {},\n      jdFileName: item.jdFileName || '',\n      currentJDHash: item.currentJDHash || '',\n      jdModifiedTime: item.jdModifiedTime || ''\n    }\n  }];\n}\n\nconst totalScore = jdAnalysis.total_score || 0;\nlet qualityBand = 'Poor';\nif (totalScore >= 8) qualityBand = 'Strong';\nelse if (totalScore >= 5) qualityBand = 'Weak';\n\nreturn [{\n  json: {\n    // Pass everything from upstream\n    config: item.config || {},\n    weights: item.weights || {},\n    jdFileName: item.jdFileName || '',\n    jdFileId: item.jdFileId || '',\n    currentJDHash: item.currentJDHash || '',\n    jdModifiedTime: item.jdModifiedTime || '',\n    // JD analysis results\n    jdAnalysis: jdAnalysis,\n    jdQualityScore: totalScore,\n    jdQualityBand: qualityBand,\n    proceedWithScoring: totalScore >= 5,\n    extractedRoleName: jdAnalysis.extracted_role_name || '',\n    extractedSeniority: jdAnalysis.extracted_seniority || '',\n    extractedExperience: jdAnalysis.extracted_experience || '',\n    extractedIndustry: jdAnalysis.extracted_industry || '',\n    extractedAdjacentIndustries: (jdAnalysis.extracted_adjacent_industries || []).join(', '),\n    extractedResponsibilities: jdAnalysis.extracted_responsibilities || '',\n    extractedMustHaveSkills: (jdAnalysis.extracted_must_have_skills || []).join(', '),\n    extractedNiceToHaveSkills: (jdAnalysis.extracted_nice_to_have_skills || []).join(', '),\n    absentFields: (jdAnalysis.absent_fields || []).join(', '),\n    inferredFields: (jdAnalysis.inferred_fields || []).join(', ')\n  }\n}];"
+      },
+      "id": "7f0f400a-07cf-4212-b476-e2ea19aa3c3d",
+      "name": "Parse JD Response1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition-proceed",
+              "leftValue": "={{ $json.proceedWithScoring }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b0d30449-faf5-4190-ad06-1c78f0d42d1f",
+      "name": "JD Quality OK?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        1456
+      ],
+      "id": "6ae791e2-74f2-4784-b2a0-c51ab030397b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item = items[0];\n\n// Text comes from Extract from File node\nconst rawText = item.json.text || '';\n\n// Sanitize for JSON injection\nconst sanitized = rawText\n  .replace(/\\\\/g, '\\\\\\\\')\n  .replace(/\"/g, '\\\\\"')\n  .replace(/\\n/g, '\\\\n')\n  .replace(/\\r/g, '\\\\r')\n  .replace(/\\t/g, '\\\\t')\n  .replace(/[\\x00-\\x1F\\x7F]/g, ' ');\n\n// Pull context from upstream nodes using exact names\nconst configData = $('Parse Config1').item.json;\nconst jdFileData = $('Check JD File1').item.json;\n\nreturn [{\n  json: {\n    jdTextSanitized: sanitized,\n    jdWordCount: rawText.split(/\\s+/).filter(w => w.length > 0).length,\n    // Config context\n    config: configData.config,\n    weights: configData.weights,\n    // JD file context\n    jdFileName: jdFileData.jdFileName || '',\n    jdFileId: jdFileData.jdFileId || '',\n    currentJDHash: jdFileData.currentJDHash || '',\n    jdModifiedTime: jdFileData.jdModifiedTime || ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        1456
+      ],
+      "id": "806dc603-799d-4716-8464-cd9c0158d009",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item = items[0].json;\n\nconst resumeText = item.resumeText || item.text || '';\nconst words = resumeText.split(/\\s+/).filter(w => w.length > 0);\nconst wasTruncated = words.length > 3000;\nconst finalResumeText = wasTruncated \n  ? words.slice(0, 3000).join(' ')\n  : resumeText;\n\nconst sanitized = finalResumeText\n  .replace(/\\\\/g, '\\\\\\\\')\n  .replace(/\"/g, '\\\\\"')\n  .replace(/\\n/g, '\\\\n')\n  .replace(/\\r/g, '\\\\r')\n  .replace(/\\t/g, '\\\\t')\n  .replace(/[\\x00-\\x1F\\x7F]/g, ' ');\n\nconst wordCount = resumeText\n  .split(/\\s+/).filter(w => w.length > 0).length;\nconst nonAlphaRatio =\n  (resumeText.replace(/[a-zA-Z0-9\\s]/g, '').length) / (resumeText.length || 1);\nconst textLower = resumeText.toLowerCase();\n\nconst hasExperience = textLower.includes('experience')\n  || textLower.includes('employment');\nconst hasSkills = textLower.includes('skills')\n  || textLower.includes('technologies');\nconst hasEducation = textLower.includes('education')\n  || textLower.includes('degree');\nconst sectionsFound = [hasExperience, hasSkills, hasEducation]\n  .filter(Boolean).length;\n\nlet confidencePenalty = 0;\nconst confidenceSignals = [];\n\nif (wordCount < 150) {\n  confidencePenalty += 2;\n  confidenceSignals.push('Resume under 150 words');\n} else if (wordCount < 300) {\n  confidencePenalty += 1;\n  confidenceSignals.push('Resume under 300 words');\n}\nif (sectionsFound < 2) {\n  confidencePenalty += 2;\n  confidenceSignals.push(`Only ${sectionsFound} of 3 sections detected`);\n} else if (sectionsFound < 3) {\n  confidencePenalty += 1;\n  confidenceSignals.push('One key section missing');\n}\nif (nonAlphaRatio > 0.3) {\n  confidencePenalty += 2;\n  confidenceSignals.push('High non-alphabetic character ratio');\n}\n\nconst triggerData = $('Drive Trigger - New Resume1').item.json;\n\nconst scoringConfig = JSON.stringify({\n  role: {\n    title: item.extractedRoleName || '',\n    seniority: item.extractedSeniority || '',\n    experience_required: item.extractedExperience || '',\n    experience_type: item.config?.Experience_Type || 'FULLTIME_ONLY', \n    industry: item.extractedIndustry || '',\n    adjacent_industries: (item.extractedAdjacentIndustries || '')\n      .split(',').map(s => s.trim()).filter(s => s),\n    responsibilities: item.extractedResponsibilities || ''\n  },\n  skills: {\n    must_have: (item.extractedMustHaveSkills || '')\n      .split(',').map(s => s.trim()).filter(s => s),\n    nice_to_have: (item.extractedNiceToHaveSkills || '')\n      .split(',').map(s => s.trim()).filter(s => s)\n  },\n  scoring_context: {\n    inferred_fields: (item.inferredFields || '')\n      .split(',').map(s => s.trim()).filter(s => s),\n    evaluation_date: new Date().toISOString().split('T')[0], \n    absent_fields: (item.absentFields || '')\n      .split(',').map(s => s.trim()).filter(s => s)\n  }\n});\nif (wasTruncated) {\n  confidencePenalty += 1;\n  confidenceSignals.push('Resume truncated at 3000 words — tail content not scored');\n}\n\nreturn [{\n  json: {\n    config: item.config || {},\n    weights: item.weights || {},\n    extractedRoleName: item.extractedRoleName || '',\n    extractedSeniority: item.extractedSeniority || '',\n    extractedExperience: item.extractedExperience || '',\n    extractedIndustry: item.extractedIndustry || '',\n    extractedAdjacentIndustries: item.extractedAdjacentIndustries || '',\n    extractedResponsibilities: item.extractedResponsibilities || '',\n    extractedMustHaveSkills: item.extractedMustHaveSkills || '',\n    extractedNiceToHaveSkills: item.extractedNiceToHaveSkills || '',\n    inferredFields: item.inferredFields || '',\n    absentFields: item.absentFields || '',\n    resumeTextSanitized: sanitized,\n    resumeText: resumeText,\n    resumeWordCount: wordCount,\n    resumeExtractionFailed: wordCount < 150 || nonAlphaRatio > 0.3,\n    resumeTruncated: wasTruncated,  // ← updated\n    confidencePenaltyFromExtraction: confidencePenalty,\n    confidenceSignals: confidenceSignals,\n    sectionsFound: sectionsFound,\n    fileId: triggerData.id || '',\n    fileName: triggerData.name || '',\n    submissionDate: new Date().toISOString(),\n    scoringConfig: scoringConfig\n  }\n}];"
+      },
+      "id": "c3931626-b49a-44d7-940e-40219022439e",
+      "name": "Sanitize Resume1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2592,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Drive Trigger - New Resume1').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "1f74a6ee-7ac3-4011-b744-5b8020bd5f0b",
+      "name": "Download Resume Text2",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1920,
+        1456
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0XUd3MdfOwNeRcDq",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "c88d3735-3417-440e-a789-560a39e0df37",
+      "name": "Extract Resume Text2",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        2144,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-extraction-ok",
+              "leftValue": "={{ $json.resumeExtractionFailed }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "fc65f982-365a-40dd-a11c-a38bc59a8bf2",
+      "name": "Extraction OK?2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2816,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "YOUR-API-KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 800,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Extract candidate information from this resume. Return ONLY valid JSON, no other text.\\n\\nRESUME:\\n{{ $json.resumeTextSanitized }}\\n\\nRules:\\n- For email: extract first email address found\\n- For mobile: extract first phone number found\\n- For name: extract full name from top of resume\\n- For current_title: most recent job title\\n- For total_years_experience: estimate total years based on work history\\n\\nReturn this exact JSON with no extra text:\\n{\\\"name\\\": \\\"\\\", \\\"email\\\": \\\"\\\", \\\"mobile\\\": \\\"\\\", \\\"current_title\\\": \\\"\\\", \\\"total_years_experience\\\": \\\"\\\"}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "c9b4c4d7-9ee1-4714-b9f4-3c24919f4dbd",
+      "name": "Triage - Extract Candidate Info (Haiku)2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3040,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.item.json;\nconst upstreamContext = $('Sanitize Resume1').item.json;\n\nlet candidateInfo = {\n  name: '', email: '', mobile: '',\n  current_title: '', total_years_experience: '',\n  graduation_year: '', is_student: ''\n};\n\ntry {\n  const content = item.content;\n  let rawText = Array.isArray(content)\n    ? content.filter(c => c.type === 'text').map(c => c.text).join('')\n    : JSON.stringify(content);\n  const cleaned = rawText\n    .replace(/```json/g, '').replace(/```/g, '').trim();\n  candidateInfo = JSON.parse(cleaned);\n} catch(e) {}\n\nconst rawId = `${candidateInfo.name || ''}_${candidateInfo.mobile || ''}`;\nlet hash = 0;\nfor (let i = 0; i < rawId.length; i++) {\n  const char = rawId.charCodeAt(i);\n  hash = ((hash << 5) - hash) + char;\n  hash = hash & hash;\n}\nconst candidateId = Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');\n\nconst dealbreakers = (upstreamContext.config?.Dealbreaker_Skills || '')\n  .split(',').map(s => s.trim().toLowerCase()).filter(s => s.length > 0);\nconst resumeLower = (upstreamContext.resumeText || '').toLowerCase();\nconst failedDealbreakers = dealbreakers.filter(s => !resumeLower.includes(s));\n\nreturn [{\n  json: {\n    resumeTextSanitized: upstreamContext.resumeTextSanitized || '',\n    resumeText: upstreamContext.resumeText || '',\n    scoringConfig: upstreamContext.scoringConfig || '',\n    config: upstreamContext.config || {},\n    weights: upstreamContext.weights || {},\n    fileId: upstreamContext.fileId || '',\n    fileName: upstreamContext.fileName || '',\n    submissionDate: upstreamContext.submissionDate || '',\n    confidencePenaltyFromExtraction: upstreamContext.confidencePenaltyFromExtraction || 0,\n    confidenceSignals: upstreamContext.confidenceSignals || [],\n    inferredFields: upstreamContext.inferredFields || '',\n    resumeTruncated: upstreamContext.resumeTruncated || false,\n    candidateName: candidateInfo.name || '',\n    candidateEmail: candidateInfo.email || '',\n    candidateMobile: candidateInfo.mobile || '',\n    candidateCurrentTitle: candidateInfo.current_title || '',\n    candidateId: candidateId || 'UNKNOWN',\n    graduationYear: candidateInfo.graduation_year || '',\n    isStudent: candidateInfo.is_student || '',\n    dealBreakerFailed: failedDealbreakers.length > 0,\n    failedDealbreakers: failedDealbreakers\n  }\n}];"
+      },
+      "id": "ca4b1838-0eb7-4985-8e03-e2482545efa6",
+      "name": "Parse Triage Response2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-dealbreaker",
+              "leftValue": "={{ $json.dealBreakerFailed }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b63b5d96-24ca-4f72-b9c3-1b5a8ad5f9b6",
+      "name": "Passed Dealbreakers?2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3488,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item = items[0].json;\n\nreturn [{\n  json: {\n    resumeTextSanitized: item.resumeTextSanitized || '',\n    resumeText: item.resumeText || '',\n    scoringConfig: item.scoringConfig || '',\n    config: item.config || {},\n    weights: item.weights || {},\n    fileId: item.fileId || '',\n    fileName: item.fileName || '',\n    submissionDate: item.submissionDate || '',\n    confidencePenaltyFromExtraction: item.confidencePenaltyFromExtraction || 0,\n    confidenceSignals: item.confidenceSignals || [],\n    inferredFields: item.inferredFields || '',\n    resumeTruncated: item.resumeTruncated || false,\n    candidateName: item.candidateName || '',\n    candidateEmail: item.candidateEmail || '',\n    candidateMobile: item.candidateMobile || '',\n    candidateCurrentTitle: item.candidateCurrentTitle || '',\n    candidateId: item.candidateId || '',\n    dealBreakerFailed: item.dealBreakerFailed || false\n  }\n}];"
+      },
+      "id": "b07eb1d8-91a3-44bb-a1d9-b2a310ca483f",
+      "name": "Build Scoring Config JSON2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3712,
+        1328
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "YOUR-API-KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "id": "a6023923-d221-4e28-b974-0b0d37cc958a",
+      "name": "Score Resume (Sonnet)2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4160,
+        1328
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.item.json;\n\nlet scores = null;\n\ntry {\n  const content = item.content;\n  let rawText = Array.isArray(content)\n    ? content.filter(c => c.type === 'text').map(c => c.text).join('')\n    : JSON.stringify(content);\n  const cleaned = rawText\n    .replace(/```json/g, '').replace(/```/g, '').trim();\n  scores = JSON.parse(cleaned);\n} catch(e) {\n  return [{\n    json: {\n      ...item,\n      aiResponseError: true,\n      processingStatus: 'AI_RESPONSE_ERROR',\n      errorDetails: 'AI scoring failed to return valid JSON'\n    }\n  }];\n}\n\n// Clamp scores\nconst d1 = Math.min(10, Math.max(0, parseFloat(scores.d1_skills?.score) || 0));\nconst d2 = Math.min(10, Math.max(0, parseFloat(scores.d2_experience?.score) || 0));\nconst d3 = Math.min(10, Math.max(0, parseFloat(scores.d3_seniority?.score) || 0));\nconst d4 = Math.min(10, Math.max(0, parseFloat(scores.d4_impact?.score) || 0));\nconst rawD5 = parseFloat(scores.d5_red_flags?.score) || 0;\nconst d5 = Math.min(0, Math.max(-10, -rawD5));\n\n// Weights\nconst w1 = parseFloat(item.config?.Weight_Skills_Match) || 35;\nconst w2 = parseFloat(item.config?.Weight_Experience) || 25;\nconst w3 = parseFloat(item.config?.Weight_Seniority) || 20;\nconst w4 = parseFloat(item.config?.Weight_Impact_Quality) || 15;\nconst w5 = parseFloat(item.config?.Weight_Red_Flag_Penalty) || 5;\n\n// Weighted scores\nconst d1Weighted = Math.round((d1 * w1) / 100 * 10) / 10;\nconst d2Weighted = Math.round((d2 * w2) / 100 * 10) / 10;\nconst d3Weighted = Math.round((d3 * w3) / 100 * 10) / 10;\nconst d4Weighted = Math.round((d4 * w4) / 100 * 10) / 10;\nconst d5Weighted = Math.round((d5 * w5) / 100 * 10) / 10;\n\n// Final score\nlet finalScore = ((d1 * w1) + (d2 * w2) + (d3 * w3) + (d4 * w4)) / 10;\nfinalScore = Math.max(0, Math.min(100, Math.round((finalScore + d5Weighted) * 10) / 10));\n\n// Recommendation tier - HR friendly labels\nlet recommendationTier = 'Reject';\nif (finalScore >= 80) recommendationTier = 'Strong Shortlist';\nelse if (finalScore >= 65) recommendationTier = 'Shortlist';  // ← both say Shortlist\nelse if (finalScore >= 50) recommendationTier = 'Maybe';\n\n// Confidence\nlet evidencePenalty = 0;\nconst evidenceSignals = [];\nif (!scores.d1_skills?.evidence || scores.d1_skills.evidence.length < 10) {\n  evidencePenalty++; evidenceSignals.push('Skills scored without direct evidence');\n}\nif (!scores.d2_experience?.evidence || scores.d2_experience.evidence.length < 10) {\n  evidencePenalty++; evidenceSignals.push('Experience scored without direct evidence');\n}\nif (!scores.d3_seniority?.evidence || scores.d3_seniority.evidence.length < 10) {\n  evidencePenalty++; evidenceSignals.push('Seniority scored without direct evidence');\n}\nif (!scores.d4_impact?.evidence || scores.d4_impact.evidence.length < 10) {\n  evidencePenalty++; evidenceSignals.push('Impact scored without direct evidence');\n}\n\nconst totalPenalty = (item.confidencePenaltyFromExtraction || 0) + evidencePenalty;\nconst confidenceScore = Math.max(0, 10 - totalPenalty);\nconst confidenceLevel = confidenceScore >= 8 ? 'High' : confidenceScore >= 5 ? 'Medium' : 'Low';\nconst allSignals = [...(item.confidenceSignals || []), ...evidenceSignals];\n\n// Skills formatting\nconst mustHaveConfirmed = (scores.d1_skills?.must_have_confirmed || []).join(', ');\nconst mustHaveInferred = (scores.d1_skills?.must_have_inferred || []).join(', ');\nconst mustHaveMissing = (scores.d1_skills?.must_have_missing || []).join(', ');\nconst niceToHaveConfirmed = (scores.d1_skills?.nice_to_have_confirmed || []).join(', ');\nconst niceToHaveInferred = (scores.d1_skills?.nice_to_have_inferred || []).join(', ');\n\n// Skills gap summary\nconst missingCount = (scores.d1_skills?.must_have_missing || []).length;\nconst skillsGapSummary = missingCount > 0\n  ? `${missingCount} missing: ${mustHaveMissing}`\n  : 'All must-have skills present';\n\n// Red flags as labels\nconst flagsList = scores.d5_red_flags?.flags || [];\nconst experienceRequired = item.config?.Experience_Required || '';\nconst totalYearsFound = scores.d2_experience?.total_years_found || '';\n\nlet redFlags = '';\nif (flagsList.length > 0) {\n  redFlags = flagsList.join(' | ');\n} else {\n  const notes = [];\n  notes.push('No major red flags identified');\n  if (d2 <= 7 && experienceRequired && totalYearsFound) {\n    notes.push(`Experience: ${cleanTotalExperience} vs ${experienceRequired}`);\n  }\n  redFlags = notes.join(' — ');\n}\n\n// Summary reasoning\nconst summaryReasoning = scores.candidate_summary?.executive_summary || '';\n\n// Experience and company\nconst totalExperience = scores.candidate_summary?.total_years_experience\n  || scores.d2_experience?.total_years_found || '';\nconst currentCompany = scores.candidate_summary?.current_company || '';\nconst cleanTotalExperience = (totalExperience || '')\n  .split(/[.—–\\n]/)[0].trim().slice(0, 60);\n\nconst cleanDomainMatch = (scores.d2_experience?.domain_match || '')\n  .split(/[.—–\\n]/)[0].trim().slice(0, 80);\n\nreturn [{\n  json: {\n    // Candidate info\n    candidateName: item.candidateName || '',\n    candidateEmail: item.candidateEmail || '',\n    candidateMobile: item.candidateMobile || '',\n    candidateCurrentTitle: item.candidateCurrentTitle || '',\n    currentCompany: currentCompany,\n    candidateId: item.candidateId || '',\n    fileId: item.fileId || '',\n    fileName: item.fileName || '',\n    submissionDate: item.submissionDate || new Date().toISOString(),\n    processingDate: new Date().toISOString(),\n    config: item.config || {},\n    inferredFields: item.inferredFields || '',\n    resumeTruncated: item.resumeTruncated || false,\n    confidenceSignals: allSignals.join(' | '),\n    // Scores\n    scores,\n    d1Raw: d1, d1Weight: w1, d1Weighted,\n    d2Raw: d2, d2Weight: w2, d2Weighted,\n    d3Raw: d3, d3Weight: w3, d3Weighted,\n    d4Raw: d4, d4Weight: w4, d4Weighted,\n    d5Raw: d5, d5Weight: w5, d5Weighted,\n    finalScore,\n    finalScoreDisplay: `${finalScore} / 100`,\n    recommendationTier,\n    confidenceLevel,\n    // HR friendly fields\n    summaryReasoning,\n    skillsGapSummary,\n    mustHaveConfirmed,\n    mustHaveInferred,\n    mustHaveMissing,\n    niceToHaveConfirmed,\n    niceToHaveInferred,\n    redFlags,\n    d1Reasoning: scores.d1_skills?.reasoning || '',\n    d2Reasoning: scores.d2_experience?.reasoning || '',\n    d3Reasoning: scores.d3_seniority?.reasoning || '',\n    d4Reasoning: scores.d4_impact?.reasoning || '',\n    d5Reasoning: scores.d5_red_flags?.reasoning || '',\n    keyEvidence: scores.key_evidence || '',\n    totalExperience: cleanTotalExperience,\n    domainMatch: cleanDomainMatch,\n    processingStatus: 'SCORED',\n    graduationYear: scores.candidate_summary?.graduation_year || '',\n    isStudent: scores.candidate_summary?.is_student || '',\n    internshipSummary: scores.d2_experience?.internship_summary || '',\n    errorDetails: ''\n  }\n}];"
+      },
+      "id": "83c18d61-b747-42ca-bf4c-bfbfba260e05",
+      "name": "Aggregate Scores2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4384,
+        1328
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1i-zT2uViIPJu8Oci5KaD4oKDKuUGg8eZa6uEdnPaZm4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Mobile": "='{{ $('Build Sonnet Request').item.json.candidateMobile }}",
+            "Current Title": "={{ $('Build Sonnet Request').item.json.candidateCurrentTitle }}",
+            "Final Score": "={{ $json.finalScoreDisplay }}",
+            "D1 Reasoning": "={{ $json.scores.d1_skills?.reasoning }}",
+            "D2 Reasoning": "={{ $json.scores.d2_experience?.reasoning }}",
+            "D3 Reasoning": "={{ $json.scores.d3_seniority?.reasoning }}",
+            "D4 Reasoning": "={{ $json.scores.d4_impact?.reasoning }}",
+            "D5 Reasoning": "={{ $json.scores.d5_red_flags?.reasoning }}",
+            "Key Evidence": "={{ $json.keyEvidence }}",
+            "Confidence Signals": "={{ $json.confidenceSignals }}",
+            "Processing Status": "={{ $json.processingStatus }}",
+            "Email": "={{ $('Build Sonnet Request').item.json.candidateEmail }}",
+            "Candidate Name": "={{ $('Build Sonnet Request').item.json.candidateName }}",
+            "Current Company": "={{ $json.currentCompany }}",
+            "Total Experience": "={{ $json.totalExperience }}",
+            "Resume Link": "={{ $('Build Sonnet Request').item.json.fileId ? 'https://drive.google.com/file/d/' + $('Build Sonnet Request').item.json.fileId + '/view' : '' }}",
+            "Submission Date": "={{ $json.submissionDate }}",
+            "Processing Date": "={{ $json.processingDate }}",
+            "Recommendation": "={{ $json.recommendationTier }}",
+            "Summary": "={{ $json.summaryReasoning }}",
+            "Skills Match": "={{ $json.d1Raw }} / 10",
+            "Experience Match": "={{ $json.d2Raw }} / 10",
+            "Seniority Fit": "={{ $json.d3Raw }} / 10",
+            "Impact Quality": "={{ $json.d4Raw }} / 10",
+            "Domain Match": "={{ $json.domainMatch }}",
+            "Skills Gap": "={{ $json.skillsGapSummary }}",
+            "Must Have Confirmed": "={{ $json.mustHaveConfirmed }}",
+            "Must Have Inferred": "={{ $json.mustHaveInferred }}",
+            "Must Have Missing": "={{ $json.mustHaveMissing }}",
+            "Nice To Have Found": "={{ $json.niceToHaveConfirmed }}",
+            "Red Flags": "={{ $json.redFlags }}",
+            "Confidence": "={{ $json.confidenceLevel }}",
+            "Rescored": "No"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Candidate Name",
+              "displayName": "Candidate Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Mobile",
+              "displayName": "Mobile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Current Title",
+              "displayName": "Current Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Current Company",
+              "displayName": "Current Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total Experience",
+              "displayName": "Total Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Processing Date",
+              "displayName": "Processing Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Final Score",
+              "displayName": "Final Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recommendation",
+              "displayName": "Recommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Skills Match",
+              "displayName": "Skills Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Experience Match",
+              "displayName": "Experience Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Seniority Fit",
+              "displayName": "Seniority Fit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Impact Quality",
+              "displayName": "Impact Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Domain Match",
+              "displayName": "Domain Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Skills Gap",
+              "displayName": "Skills Gap",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Must Have Confirmed",
+              "displayName": "Must Have Confirmed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Must Have Inferred",
+              "displayName": "Must Have Inferred",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Must Have Missing",
+              "displayName": "Must Have Missing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nice To Have Found",
+              "displayName": "Nice To Have Found",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Red Flags",
+              "displayName": "Red Flags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Key Evidence",
+              "displayName": "Key Evidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Confidence",
+              "displayName": "Confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Confidence Signals",
+              "displayName": "Confidence Signals",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "D1 Reasoning",
+              "displayName": "D1 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "D2 Reasoning",
+              "displayName": "D2 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "D3 Reasoning",
+              "displayName": "D3 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "D4 Reasoning",
+              "displayName": "D4 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "D5 Reasoning",
+              "displayName": "D5 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processing Status",
+              "displayName": "Processing Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Error Details",
+              "displayName": "Error Details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Rescored",
+              "displayName": "Rescored",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "HR Decision",
+              "displayName": "HR Decision",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "6a68e840-9f95-4fef-a4d4-d7afbd4cd949",
+      "name": "Write Scored Row to Output2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4608,
+        1328
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.item.json;\n\nlet status = 'ERROR';\nlet errorDetails = '';\n\nif (data.isPDF === false) {\n  status = 'NOT_PDF';\n  errorDetails = `File rejected — not a PDF: ${data.fileName || data.name || 'unknown'}`;\n} else if (data.isDuplicateFile === true) {\n  status = 'DUPLICATE';\n  errorDetails = `Already processed — file ID: ${data.fileId || data.id || ''}`;\n} else if (data.readyToScore !== 'YES') {\n  status = 'CONFIG_NOT_READY';\n  errorDetails = 'Ready_To_Score is not YES in config sheet';\n} else if (data.jdFound === false) {\n  status = 'JD_NOT_FOUND';\n  errorDetails = 'JD file not found — check JD_File_Name in config sheet';\n} else if (data.proceedWithScoring === false) {\n  status = 'JD_QUALITY_FAILED';\n  errorDetails = `JD quality too low (${data.jdQualityScore}/10) — improve the JD`;\n} else if (data.dealBreakerFailed) {\n  status = 'HARD_DISQUALIFY';\n  errorDetails = `Missing dealbreaker skills: ${(data.failedDealbreakers || []).join(', ')}`;\n} else if (data.resumeExtractionFailed) {\n  status = 'EXTRACTION_FAILED';\n  errorDetails = 'Resume text could not be extracted reliably. Check PDF format.';\n} else if (data.aiResponseError) {\n  status = 'AI_RESPONSE_ERROR';\n  errorDetails = data.errorDetails || 'AI scoring failed';\n} else {\n  status = 'ERROR';\n  errorDetails = 'Unknown processing error';\n}\n\nreturn [{\n  json: {\n    candidateName: data.candidateName || '',\n    candidateEmail: data.candidateEmail || '',\n    candidateMobile: data.candidateMobile || '',\n    fileName: data.fileName || data.name || '',\n    fileId: data.fileId || data.id || '',\n    submissionDate: data.submissionDate || new Date().toISOString(),\n    processingStatus: status,\n    errorDetails: errorDetails\n  }\n}];"
+      },
+      "id": "31f35c90-9cac-4126-9e64-cd11eb337964",
+      "name": "Prepare Error Row2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3712,
+        1552
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1i-zT2uViIPJu8Oci5KaD4oKDKuUGg8eZa6uEdnPaZm4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.candidateEmail }}",
+            "Mobile": "='{{ $json.candidateMobile }}",
+            "Submission Date": "={{ $json.submissionDate }}",
+            "Processing Date": "={{ new Date().toISOString() }}",
+            "Final Score": "N/A",
+            "Processing Status": "={{ $json.processingStatus }}",
+            "Error Details": "={{ $json.errorDetails }}",
+            "Candidate Name": "={{ $json.candidateName }}",
+            "Resume Link": "={{ $json.fileId ? 'https://drive.google.com/file/d/' + $json.fileId + '/view' : '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Candidate Name",
+              "displayName": "Candidate Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mobile",
+              "displayName": "Mobile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Current Title",
+              "displayName": "Current Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Current Company",
+              "displayName": "Current Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Total Experience",
+              "displayName": "Total Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processing Date",
+              "displayName": "Processing Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Final Score",
+              "displayName": "Final Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recommendation",
+              "displayName": "Recommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Skills Match",
+              "displayName": "Skills Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Experience Match",
+              "displayName": "Experience Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Seniority Fit",
+              "displayName": "Seniority Fit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Impact Quality",
+              "displayName": "Impact Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Domain Match",
+              "displayName": "Domain Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Skills Gap",
+              "displayName": "Skills Gap",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Must Have Confirmed",
+              "displayName": "Must Have Confirmed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Must Have Inferred",
+              "displayName": "Must Have Inferred",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Must Have Missing",
+              "displayName": "Must Have Missing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nice To Have Found",
+              "displayName": "Nice To Have Found",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Red Flags",
+              "displayName": "Red Flags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Key Evidence",
+              "displayName": "Key Evidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Confidence",
+              "displayName": "Confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Confidence Signals",
+              "displayName": "Confidence Signals",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "D1 Reasoning",
+              "displayName": "D1 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "D2 Reasoning",
+              "displayName": "D2 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "D3 Reasoning",
+              "displayName": "D3 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "D4 Reasoning",
+              "displayName": "D4 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "D5 Reasoning",
+              "displayName": "D5 Reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Processing Status",
+              "displayName": "Processing Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Error Details",
+              "displayName": "Error Details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rescored",
+              "displayName": "Rescored",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "HR Decision",
+              "displayName": "HR Decision",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "5980f11f-3add-4e33-a6d6-96947f0f2b2d",
+      "name": "Write Error Row to Output2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3936,
+        1552
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item = items[0];\n\n// Get resume text from direct input (Extract Resume Text2)\nconst resumeText = item.json.text || '';\n\n// Get JD context - Parse JD Response1 is upstream\n// on the same linear path through Update Config Row 2\nconst jdContext = $('Parse JD Response1').item.json;\n\nreturn [{\n  json: {\n    resumeText: resumeText,\n    config: jdContext.config || {},\n    weights: jdContext.weights || {},\n    extractedRoleName: jdContext.extractedRoleName || '',\n    extractedSeniority: jdContext.extractedSeniority || '',\n    extractedExperience: jdContext.extractedExperience || '',\n    extractedIndustry: jdContext.extractedIndustry || '',\n    extractedAdjacentIndustries: jdContext.extractedAdjacentIndustries || '',\n    extractedResponsibilities: jdContext.extractedResponsibilities || '',\n    extractedMustHaveSkills: jdContext.extractedMustHaveSkills || '',\n    extractedNiceToHaveSkills: jdContext.extractedNiceToHaveSkills || '',\n    inferredFields: jdContext.inferredFields || '',\n    absentFields: jdContext.absentFields || ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2368,
+        1456
+      ],
+      "id": "f40ac0ab-9968-4a38-b685-d122a2e11966",
+      "name": "RestoreJDContext"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.all()[0].json;\n\nconst requestBody = {\n  model: \"claude-sonnet-4-6\",\n  max_tokens: 2500,\n  messages: [\n    {\n      role: \"user\",\n      content: `You are an expert technical recruiter. Evaluate the resume against the role configuration and return ONLY valid JSON, no other text.\n\nCRITICAL RULES:\n1. Score each dimension 0-10\n2. Quote exact resume text as evidence for every score above 3\n3. If no evidence found, score must be 3 or below\n4. All scoring rules below are derived from the role config — do not apply generic assumptions\n\nINTERNSHIP RULES (apply before scoring anything):\n- Internships are always short by design. NEVER flag them as Short Tenure in D5\n- Whether they count toward experience is controlled by Experience_Type in config:\n    - FULLTIME_ONLY: internships = 0 experience credit in D2, but note them\n      as industry familiarity signals in internship_summary\n    - INCLUDE_INTERNSHIPS: internships = full experience credit in D2\n- For Associate/Entry level roles, having 0 full-time experience is normal\n  and expected — do not penalize it\n\nCANDIDATE EXTRACTION RULES:\n- Extract graduation_year explicitly from the education section\n- Set is_student = YES only if currently enrolled, NO if already graduated\n- Do not infer student status from job titles or internship history\n\nSKILL DETECTION RULES:\n- CONFIRMED: skill explicitly named AND used in a bullet with context or outcome\n- INFERRED: skill clearly demonstrated through related work but never named\n  (e.g. ran cross-functional sprints → Agile implied, built dashboards → analytics tool implied)\n- MISSING: no direct or indirect evidence\n- Never mix confirmed and inferred in the same list\n- Surface-listed skills with no bullet evidence = INFERRED, not confirmed\n\nRED FLAG RULES:\n- Return flags as short labels only, maximum 5 words each\n- Format: \"Type (detail)\" e.g. \"Employment Gap (9 months)\"\n- Valid types: Employment Gap, Short Tenure, Overqualified,\n  Keyword Stuffing, Career Regression\n- Short Tenure: only applies to FULL-TIME roles under 12 months\n- Internships are NEVER a red flag regardless of count or duration\n- If no flags: return empty array\n\nD1 SKILLS MATCH (0-10):\n- Check each skill in Must_Have_Skills from config against the resume\n- CONFIRMED skills score at full value\n- INFERRED skills score up to a ceiling based on Seniority_Level from config:\n    - Associate / Entry → ceiling 7 (learning on the job is acceptable)\n    - Mid → ceiling 5\n    - Senior / Lead / Director → ceiling 3 (must be explicitly demonstrated)\n- MISSING must-have skills: penalize proportionally to how many are missing\n- Also check Nice_To_Have_Skills — confirmed nice-to-haves can contribute\n  up to 1 bonus point on top of the must-have score, capped at 10\n- must_have_confirmed and must_have_inferred arrays must only contain \n  skills copied exactly from the Must_Have_Skills list in config — \n  never paraphrase, rename, or add skills not in that list\n\nD2 EXPERIENCE RELEVANCE (0-10):\n- Use evaluation_date from scoring_context as today's date when \n  calculating duration of \"Present\" roles\n- Never assume \"Present\" means recently started\n- Extract actual total years of FULL-TIME work from work history dates\n- Apply Experience_Type from config:\n    - FULLTIME_ONLY: count only full-time roles toward total years.\n      Record internships separately in internship_summary as familiarity signals\n    - INCLUDE_INTERNSHIPS: count all roles including internships toward total years\n- Compare total against Experience_Required from config\n- If candidate meets or exceeds requirement → no experience penalty\n- If under by less than 25% → minor penalty (deduct 1-2 points)\n- If under by 25-50% → moderate penalty (deduct 3-4 points)\n- If under by more than 50% → significant penalty (deduct 5+ points)\n- For Associate/Entry roles: relevant internships are strong industry familiarity\n  signals — note them in internship_summary even under FULLTIME_ONLY\n- Domain match: check against Primary_Industry AND Adjacent_Industries from config\n  Full match = no penalty, adjacent match = minor penalty, no match = significant penalty\n\nD3 SENIORITY ALIGNMENT (0-10):\n- Compare candidate signals to Seniority_Level from config\n- Signals: ownership language, scope of decisions, team size, budget ownership\n- Exact match with strong evidence = 8-10\n- One level off from required = 5-7\n- Two levels off = 2-4\n\nD4 IMPACT QUALITY (0-10):\n- CAR method per bullet: Challenge + Action + Result = 3pts\n- Quantified results with numbers or percentages = positive signal\n- \"Responsible for\", \"assisted\", \"helped\" = negative signal\n- Assess across all roles and projects, not just the most recent\n\nD5 RED FLAG PENALTY (0 to 10, positive values only):\n- Return a positive number representing penalty magnitude — code will negate it\n- Employment gap over 6 months in full-time history = 2 per gap\n- 3+ full-time jobs under 12 months = 4\n- 1-2 full-time short stints under 12 months = 2\n- Keyword stuffing = 2\n- Overqualified by 2+ seniority levels = 2\n- Internships = 0 penalty regardless of count or duration\n- No issues = 0\n\nOUTPUT FORMAT RULES — apply to every field in the JSON response:\n- total_years_experience: max 5 words. e.g. \"~10 months\", \"3.5 years\". No sentences.\n- graduation_year: 4 digit year only. e.g. \"2025\"\n- is_student: \"YES\" or \"NO\" only\n- current_company: company name only. e.g. \"Media.net\"\n- total_years_found: same format as total_years_experience\n- internship_summary: one line max. e.g. \"2 APM internships — fintech, SaaS\"\n- domain_match: one line max. e.g. \"Full match — Ad-Tech\" or \"Adjacent — SaaS, fintech\"\n- executive_summary: 2-3 sentences max, no bullet points\n- key_evidence: 2-3 bullet points max, one line each\n- reasoning fields: can be detailed, these are for internal review only\n\n[ROLE CONFIGURATION]\n${item.scoringConfig}\n\n[RESUME TEXT]\n${item.resumeText}\n\nReturn ONLY this exact JSON structure with no extra text:\n{\n  \"candidate_summary\": {\n    \"total_years_experience\": \"\",\n    \"graduation_year\": \"\",\n    \"is_student\": \"\",\n    \"current_company\": \"\",\n    \"executive_summary\": \"\"\n  },\n  \"d1_skills\": {\n    \"score\": 0,\n    \"reasoning\": \"\",\n    \"evidence\": \"\",\n    \"must_have_confirmed\": [],\n    \"must_have_inferred\": [],\n    \"must_have_missing\": [],\n    \"nice_to_have_confirmed\": [],\n    \"nice_to_have_inferred\": []\n  },\n  \"d2_experience\": {\n    \"score\": 0,\n    \"reasoning\": \"\",\n    \"evidence\": \"\",\n    \"total_years_found\": \"\",\n    \"internship_summary\": \"\",\n    \"domain_match\": \"\"\n  },\n  \"d3_seniority\": {\n    \"score\": 0,\n    \"reasoning\": \"\",\n    \"evidence\": \"\"\n  },\n  \"d4_impact\": {\n    \"score\": 0,\n    \"reasoning\": \"\",\n    \"evidence\": \"\"\n  },\n  \"d5_red_flags\": {\n    \"score\": 0,\n    \"flags\": [],\n    \"reasoning\": \"\"\n  },\n  \"key_evidence\": \"\"\n}`\n    }\n  ]\n};\n\nreturn [{\n  json: {\n    requestBody: JSON.stringify(requestBody),\n    candidateName: item.candidateName || '',\n    candidateEmail: item.candidateEmail || '',\n    candidateMobile: item.candidateMobile || '',\n    candidateCurrentTitle: item.candidateCurrentTitle || '',\n    candidateId: item.candidateId || '',\n    fileId: item.fileId || '',\n    fileName: item.fileName || '',\n    submissionDate: item.submissionDate || '',\n    config: item.config || {},\n    inferredFields: item.inferredFields || '',\n    resumeTruncated: item.resumeTruncated || false,\n    confidencePenaltyFromExtraction: item.confidencePenaltyFromExtraction || 0,\n    confidenceSignals: item.confidenceSignals || [],\n    extractedMustHaveSkills: item.extractedMustHaveSkills || '',\n    extractedNiceToHaveSkills: item.extractedNiceToHaveSkills || ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3936,
+        1328
+      ],
+      "id": "04d1f5b0-06ff-4433-9175-08720b5e3c83",
+      "name": "Build Sonnet Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "716f57ff-0408-474f-819c-2f7303fb2737",
+              "leftValue": "={{ $json.weightSumValid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -768,
+        1456
+      ],
+      "id": "3d704ff1-40f1-41a1-a0b3-5a11a9e249cf",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us",
+          "mode": "list",
+          "cachedResultName": "Config Sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VtyNmD78IMW6MYx3oPvVe-PlI5yVSH8tA5ChLkZj5Us/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Row Number": "={{ $('Parse Config1').item.json.config.row_number }}",
+            "Config Status": "ERROR - CHECK NOW"
+          },
+          "matchingColumns": [
+            "Row Number"
+          ],
+          "schema": [
+            {
+              "id": "Row Number",
+              "displayName": "Row Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "JD_File_Name",
+              "displayName": "JD_File_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Version",
+              "displayName": "JD_Version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Hash",
+              "displayName": "JD_Hash",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Last_Updated",
+              "displayName": "JD_Last_Updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Quality_Score",
+              "displayName": "JD_Quality_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Quality_Band",
+              "displayName": "JD_Quality_Band",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "JD_Fields_Missing",
+              "displayName": "JD_Fields_Missing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Ready_To_Score",
+              "displayName": "Ready_To_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Role_Name",
+              "displayName": "Role_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Seniority_Level",
+              "displayName": "Seniority_Level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Experience_Type",
+              "displayName": "Experience_Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Experience_Required",
+              "displayName": "Experience_Required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Primary_Industry",
+              "displayName": "Primary_Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Adjacent_Industries",
+              "displayName": "Adjacent_Industries",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Role_Responsibilities",
+              "displayName": "Role_Responsibilities",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Must_Have_Skills",
+              "displayName": "Must_Have_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nice_To_Have_Skills",
+              "displayName": "Nice_To_Have_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Dealbreaker_Skills",
+              "displayName": "Dealbreaker_Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Strict_Skills_Match",
+              "displayName": "Strict_Skills_Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Config Status",
+              "displayName": "Config Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Weight_Skills_Match",
+              "displayName": "Weight_Skills_Match",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Experience",
+              "displayName": "Weight_Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Seniority",
+              "displayName": "Weight_Seniority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Impact_Quality",
+              "displayName": "Weight_Impact_Quality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Weight_Red_Flag_Penalty",
+              "displayName": "Weight_Red_Flag_Penalty",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Config_Version",
+              "displayName": "Config_Version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Config_Last_Updated",
+              "displayName": "Config_Last_Updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Rescore_Previous",
+              "displayName": "Rescore_Previous",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -320,
+        1648
+      ],
+      "id": "18406e4a-b20b-45ea-9056-59f194a88adc",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GSDGoG6GrhPzX5hU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "text": "=⚠️ Resume processing failed\n*File:* {{ $json.fileName || 'Unknown' }}\n*Status:* {{ $json.processingStatus }}\n*Reason:* {{ $json.errorDetails }}\n*Time:* {{ $json.submissionDate }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        4144,
+        1552
+      ],
+      "id": "63e2d109-10f9-4517-b247-c2b807906ce5",
+      "name": "Send a message",
+      "webhookId": "de6dca19-f21b-41db-a300-84f54c5c8027",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Config Row": {
+      "main": [
+        [
+          {
+            "node": "Parse Config1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Trigger - New Resume1": {
+      "main": [
+        [
+          {
+            "node": "Check File Is PDF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check File Is PDF1": {
+      "main": [
+        [
+          {
+            "node": "Is PDF?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is PDF?1": {
+      "main": [
+        [
+          {
+            "node": "Get Output Sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Output Sheet1": {
+      "main": [
+        [
+          {
+            "node": "Check File Duplicate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check File Duplicate1": {
+      "main": [
+        [
+          {
+            "node": "Not Duplicate?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Not Duplicate?1": {
+      "main": [
+        [
+          {
+            "node": "Get Config Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Config1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config Ready?1": {
+      "main": [
+        [
+          {
+            "node": "Find JD File1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Find JD File1": {
+      "main": [
+        [
+          {
+            "node": "Check JD File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check JD File1": {
+      "main": [
+        [
+          {
+            "node": "JD Found?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JD Found?1": {
+      "main": [
+        [
+          {
+            "node": "Download JD Text1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download JD Text1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JD Quality Check (Haiku)1": {
+      "main": [
+        [
+          {
+            "node": "Parse JD Response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse JD Response1": {
+      "main": [
+        [
+          {
+            "node": "JD Quality OK?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JD Quality OK?1": {
+      "main": [
+        [
+          {
+            "node": "Update Config Row 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "JD Quality Check (Haiku)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitize Resume1": {
+      "main": [
+        [
+          {
+            "node": "Extraction OK?2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Resume Text2": {
+      "main": [
+        [
+          {
+            "node": "Extract Resume Text2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Resume Text2": {
+      "main": [
+        [
+          {
+            "node": "RestoreJDContext",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraction OK?2": {
+      "main": [
+        [
+          {
+            "node": "Triage - Extract Candidate Info (Haiku)2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Error Row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Triage - Extract Candidate Info (Haiku)2": {
+      "main": [
+        [
+          {
+            "node": "Parse Triage Response2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Triage Response2": {
+      "main": [
+        [
+          {
+            "node": "Passed Dealbreakers?2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Passed Dealbreakers?2": {
+      "main": [
+        [
+          {
+            "node": "Build Scoring Config JSON2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Error Row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Scoring Config JSON2": {
+      "main": [
+        [
+          {
+            "node": "Build Sonnet Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Resume (Sonnet)2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Scores2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Scores2": {
+      "main": [
+        [
+          {
+            "node": "Write Scored Row to Output2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Error Row2": {
+      "main": [
+        [
+          {
+            "node": "Write Error Row to Output2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Config Row 2": {
+      "main": [
+        [
+          {
+            "node": "Download Resume Text2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RestoreJDContext": {
+      "main": [
+        [
+          {
+            "node": "Sanitize Resume1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Sonnet Request": {
+      "main": [
+        [
+          {
+            "node": "Score Resume (Sonnet)2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Config Ready?1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Error Row to Output2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "efb1d757-5c03-4dab-836d-af93ac507572",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "496d9bbef2d0568f5c44a7c148051e08595c796a1996809127e7726b27a16a37"
+  },
+  "id": "6pNphYgxuHVK5lty",
+  "tags": []
+}
